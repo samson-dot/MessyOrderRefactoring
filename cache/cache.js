@@ -1,42 +1,32 @@
-// A simple Map to store our data in memory
-const store = new Map();
+import NodeCache from "node-cache";
 
-// Objects to keep track of counts for your assignment
-export const stats = {
-  hits: 0,
-  misses: 0
-};
+// Initialize cache
+const nodeCache = new NodeCache({ stdTTL: 0, checkperiod: 120 });
 
 export const cache = {
-  // Get data from cache
   get: (key) => {
-    if (store.has(key)) {
-      stats.hits++;
-      return store.get(key); // Found it!
-    }
-    stats.misses++;
-    return null; // Not in cache
+    const value = nodeCache.get(key);
+    return value !== undefined ? value : null;
   },
 
-  // Save data to cache
   set: (key, value) => {
-    store.set(key, value);
+    nodeCache.set(key, value);
   },
 
-  // Delete data from cache (when order changes)
   delete: (key) => {
-    store.delete(key);
+    nodeCache.del(key); 
   },
 
   getEfficiency: () => {
+    const stats = nodeCache.getStats(); 
     const total = stats.hits + stats.misses;
     const hitRatio = total === 0 ? 0 : ((stats.hits / total) * 100).toFixed(2);
+
     return {
       totalRequests: total,
       hits: stats.hits,
       misses: stats.misses,
       hitRatio: `${hitRatio}%`
     };
-  } 
+  }
 };
-

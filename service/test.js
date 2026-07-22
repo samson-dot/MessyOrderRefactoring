@@ -1,8 +1,7 @@
 
 
 import * as orderService from "./order.service.js";
-import { cache, stats } from "../cache/cache.js";
-
+import { cache } from "../cache/cache.js"; 
 const mockOrder = {
   customerId: "c1",
   customerName: "Ada",
@@ -78,19 +77,20 @@ test("invalid discount code throws", () => {
 
 // --- CACHE TESTS ---
 test("getOrder fetches from DB on first call and serves from cache on second call", () => {
-  // Create an order first so it exists
   const created = orderService.createOrder(mockOrder);
+
   // 1st call: Cache Miss (goes to DB)
   const firstGet = orderService.getOrder(created.id);
-  // 2nd call: Cache Hit (served instantly from cache)
+  // 2nd call: Cache Hit (served instantly from node-cache)
   const secondGet = orderService.getOrder(created.id);
 
   expect(firstGet.id).toBe(created.id);
   expect(secondGet.id).toBe(created.id);
 
-  // Asserts that your tracking works
-  expect(stats.misses).toBeGreaterThanOrEqual(1);
-  expect(stats.hits).toBeGreaterThanOrEqual(1);
+  // Use cache.getEfficiency() instead of the old 'stats' variable
+  const report = cache.getEfficiency();
+  expect(report.misses).toBeGreaterThanOrEqual(1);
+  expect(report.hits).toBeGreaterThanOrEqual(1);
 });
 
 
