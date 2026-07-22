@@ -15,7 +15,7 @@ export const takePayment = () => {
   let paid = false;
 
   for (let attempt = 1; attempt <= 3 && !paid; attempt++) {
-    if (Math.random() > 0.75)
+    if (Math.random() > 0.25) // 1.25
       paid = true;
   }
   if (paid) return { ok: true };                       // succeeded

@@ -4,8 +4,7 @@ import * as orderRepo from "../repository/order.repo.js";
 import * as payment from "../integration/payment.js";
 import { logger } from "../logger/logger.js";
 import { metrics } from "../metrics/metrics.js";
-
-
+import { cache } from "../cache/cache.js";
 
 
 // errors carry a status the controller can translate
@@ -90,7 +89,20 @@ export const createOrder = (b) => {
 
 };
 
-export const getOrder = (id) => orderRepo.findOrder(id);
+// export const getOrder = (id) => orderRepo.findOrder(id);
+
+export const getOrder = (id) => {
+  // First, check if order is already in cache
+  const cachedOrder = cache.get(id);
+  if (cachedOrder) return cachedOrder;
+  // If not in cache, go to database
+  const order = orderRepo.findOrder(id);
+  
+  // Save to cache for next time
+  if (order) cache.set(id, order);
+
+  return order;
+};
 
 export const listOrders = (filters) => orderRepo.listOrders(filters);
 
