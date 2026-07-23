@@ -28,6 +28,8 @@ export const createOrder = async (req, res, next) => {
   }
 
   try {
+    // Set the customerId to the logged-in user's ID
+    b.customerId = req.user.id;
     const order = await orderService.createOrder(b);   // call the service to create the order
     res.status(201).json(order);
   } catch (err) { // catches the thrown error from service 
@@ -45,6 +47,10 @@ export const getOrder = (req, res) => {
     return res.status(404).json({
       error: "order not found"
     });
+  }
+
+  if (req.user.role !== "admin" && order.customerId !== req.user.id) {
+    return res.status(403).json({ error: "forbidden" });
   }
 
   res.json(order);
@@ -85,10 +91,15 @@ export const changeStatus = (req, res) => {
 
 export const customerOrders = (req, res) => {
 
+  // res.json(
+  //   orderService.listOrders({
+  //     customerId: req.params.id,
+  //   })
+  // );
+  // before anyone logged in could see if the customer is an admin/the customer.
+  const targetId = req.user.role === "admin" ? req.params.id : req.user.id;
   res.json(
-    orderService.listOrders({
-      customerId: req.params.id,
-    })
+    orderService.listOrders({ customerId: targetId })
   );
 
 };

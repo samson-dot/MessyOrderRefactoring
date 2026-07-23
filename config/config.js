@@ -13,4 +13,6 @@ export const config = {
     delivered: [],
     cancelled: [],
   },
+  // added for authn
+  JWT_SECRET: "change-this-to-a-long-random-string",
 };

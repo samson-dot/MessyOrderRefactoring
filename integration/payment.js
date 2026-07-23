@@ -21,5 +21,4 @@ export const takePayment = () => {
   if (paid) return { ok: true };                       // succeeded
     return { ok: false, reason: "card_declined" };       // failed, with a reason
 
-
 };

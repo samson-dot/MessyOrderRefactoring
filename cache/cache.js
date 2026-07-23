@@ -1,7 +1,7 @@
 import NodeCache from "node-cache";
 
 // Initialize cache
-const nodeCache = new NodeCache({ stdTTL: 0, checkperiod: 120 });
+const nodeCache = new NodeCache({ stdTTL: 10, checkperiod: 120 });
 
 export const cache = {
   get: (key) => {

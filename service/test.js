@@ -50,9 +50,6 @@ test("total incorrect", () => {
 });
 
 
-
-
-
 // a test case for changing order status to assert that the it works.
 test("changes order status", () => {
 
@@ -84,8 +81,8 @@ test("getOrder fetches from DB on first call and serves from cache on second cal
   // 2nd call: Cache Hit (served instantly from node-cache)
   const secondGet = orderService.getOrder(created.id);
 
-  expect(firstGet.id).toBe(created.id);
-  expect(secondGet.id).toBe(created.id);
+  expect(firstGet.id).toBe(created.id); // db
+  expect(secondGet.id).toBe(created.id); // cached on second trial
 
   // Use cache.getEfficiency() instead of the old 'stats' variable
   const report = cache.getEfficiency();
@@ -119,7 +116,7 @@ test("measures cache efficiency and performance speedup", () => {
   // Get efficiency stats
   const report = cache.getEfficiency();
 
-  // We made 3 total requests: 1 Miss, 2 Hits
+  // 3 total requests: 1 Miss, 2 Hits
   expect(report.hits).toBeGreaterThanOrEqual(2);
   expect(report.misses).toBeGreaterThanOrEqual(1);
 
