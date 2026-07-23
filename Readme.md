@@ -69,7 +69,7 @@ Now: Only admin can see all; and logged in customers can only see theirs
 14. ByCRYPT!!! Encryption!!
 A. Install bycrypt: npm install bcrypt
 B. Created Bycrypt hash for Admin and Ada password: 
-bcrypt.hashSync("ada123", 10) // I ran this in the terminal
+bcrypt.hashSync("ada123", 10) // ran this in the terminal
 C. replaced the PW: ada123 with the returned hashed PW
 D. Adding bycrypt to auth.controller.js and changed:
 
@@ -110,22 +110,4 @@ which means a user can enter Admin instead of c1, and that is what is saved on t
  b.customerId = req.user.id;
 This ensures what is saved on the db is the user id and not the customerID sent at API. But that of the logged in person.
 
-17. Went ahead to create my own cache. named the module: mycreatedcache.js
-
-18. Added email to the signup in my authentication
-so the step was simply done in the auth.controller.js
-
-before:
-const { username, password } = req.body || {};
-const user = users.find((u) => u.username === username);
-
-after:
-const { email, username, password } = req.body || {};
-const user = users.find(
-  (u) => (email && u.email === email) || (username && u.username === username)
-);
-
-MEANWHILE,,,,,, I had added email to what make up my users.
-
-19. VALIDATION !!!!!!
-Ensured email, username and password are validated. Also, error for empty body is catched.
+17. 
