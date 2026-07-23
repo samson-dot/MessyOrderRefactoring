@@ -22,6 +22,8 @@ export const authenticate = (req, res, next) => {
 
 // Admin shittt
 // Authorization
+
+// Authorization — checks the caller's role
 export const authorize = (...allowedRoles) => {
   return (req, res, next) => {
     if (!req.user || !allowedRoles.includes(req.user.role)) {

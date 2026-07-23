@@ -7,6 +7,7 @@
 
 
 export const users = [
-  { id: "c1",     username: "ada",  password: "$2b$10$ABEixn3ftI705tjxkeBvA.4aCeaWoe69XQitONYOBmQy6xtgDGqyu",  role: "customer" },
-  { id: "admin1", username: "boss", password: "$2b$10$F4Sve68I2FdrJYH135pYt.ppW9Mlv61F.ykaRxbn4eond3I2.lRfG", role: "admin" },
+  { id: "c1",     username: "ada", email: "ada@example.com",  password: "$2b$10$ABEixn3ftI705tjxkeBvA.4aCeaWoe69XQitONYOBmQy6xtgDGqyu",  role: "customer" },
+  { id: "admin1", username: "boss", email: "boss@example.com", password: "$2b$10$F4Sve68I2FdrJYH135pYt.ppW9Mlv61F.ykaRxbn4eond3I2.lRfG", role: "admin" },
 ];
+

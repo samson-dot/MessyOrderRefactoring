@@ -1,7 +1,10 @@
 
 
 import * as orderService from "./order.service.js";
-import { cache } from "../cache/cache.js"; 
+// import { cache } from "../cache/cache.js"; 
+import { cache } from "../cache/mycreatedcache.js";
+import { jest } from "@jest/globals";
+
 const mockOrder = {
   customerId: "c1",
   customerName: "Ada",
@@ -129,3 +132,16 @@ test("measures cache efficiency and performance speedup", () => {
   console.log(`Cache Hit Ratio  : ${report.hitRatio}`);
   console.log("==============================\n");
 });
+
+
+// // my personal cache test
+// test("cache entry expires after its TTL", () => {
+//   jest.useFakeTimers();                 // take control of time
+//   cache.set("k3", "temp");
+//   expect(cache.get("k3")).toBe("temp"); // still fresh
+
+//   jest.advanceTimersByTime(11000);      // jump 11 seconds forward
+//   expect(cache.get("k3")).toBeNull();   // now expired
+
+//   jest.useRealTimers();                 // give time back
+// });
