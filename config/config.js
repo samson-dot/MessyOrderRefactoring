@@ -1,8 +1,8 @@
 // every secret, in one place — logic lives elsewhere
 
 export const config = {
-  PORT: 4000,
-  API_KEY: "super-secret-123",
+  PORT: process.env.PORT || 4000,
+  API_KEY: process.env.API_KEY,
   TAX_RATE: 0.075,
   DB_FILE: "messy-orders.db",
   DISCOUNTS: { SAVE10: 0.10, VIP: 0.20, LAUNCH: 0.25 },
@@ -14,5 +14,5 @@ export const config = {
     cancelled: [],
   },
   // added for authn
-  JWT_SECRET: "change-this-to-a-long-random-string",
+  JWT_SECRET: process.env.JWT_SECRET,
 };

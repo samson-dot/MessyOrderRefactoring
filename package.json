@@ -4,7 +4,7 @@
   "description": "",
   "main": "route/http.js",
   "scripts": {
-    "start": "node route/http.js",
+    "start": "node --env-file=.env route/http.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "devDependencies": {
