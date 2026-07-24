@@ -1,3 +1,5 @@
+![CI](https://github.com/samson-dot/MessyOrderRefactoring/actions/workflows/ci.yml/badge.svg)
+
 ## Authentication & Authorization Layer
 Replaced the shared x-api-key with JWT-based auth: per-user identity, roles, hashed passwords, and ownership checks.
 
