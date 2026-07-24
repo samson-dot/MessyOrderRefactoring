@@ -29,10 +29,7 @@ export const login = async (req, res) => {
   }
 
 
-  // match by email OR username — whichever the caller sent
-  const user = users.find(
-    (u) => (email && u.email === email) || (username && u.username === username)
-  );
+  const user = userRepo.findUser(email, username);
   // 2. check the typed password against the stored hash
   const ok = user && (await bcrypt.compare(password, user.password));
   if (!ok) {
