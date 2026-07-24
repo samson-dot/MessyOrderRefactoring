@@ -4,10 +4,11 @@ export const createOrder = async (req, res, next) => {
 
   const b = req.body || {};
 
-  if (!b.customerId || !b.customerName) // verify that customerId and customerName are provided
-    return res.status(400).json({
-      error: "customerId and customerName are required"
-    });
+  
+  // if (!b.customerId || !b.customerName) // verify that customerId and customerName are provided
+  //   return res.status(400).json({
+  //     error: "customerId and customerName are required"
+  //   });
 
   if (!Array.isArray(b.items) || b.items.length === 0) // verify that items is an array and has at least one item
     return res.status(400).json({
