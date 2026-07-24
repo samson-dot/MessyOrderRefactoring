@@ -1,0 +1,20 @@
+name: CI
+
+on:                          # WHEN this runs
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:                      # a job named "test"
+    runs-on: ubuntu-latest   # on a fresh Linux machine
+    steps:
+      - uses: actions/checkout@v4      # 1. get your code
+
+      - uses: actions/setup-node@v4    # 2. install Node
+        with:
+          node-version: 22
+    # the steps: install dependencies and run tests
+      - run: npm ci                    # 3. install dependencies
+
+      - run: npm test                  # 4. run your tests
