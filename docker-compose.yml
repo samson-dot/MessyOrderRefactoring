@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: messyapp
+    env_file: .env
+    ports:
+      - "4000:4000"
